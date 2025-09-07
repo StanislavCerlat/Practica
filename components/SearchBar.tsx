@@ -1,5 +1,5 @@
 "use client";
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 const SearchButton = ({ otherClasses }: {otherClasses: string}) => (
@@ -44,8 +44,8 @@ setManufacturer={setManufacturer}/>
         <div className='searchbar__item'>
           <Image
 src="/model-icon.png"
-width={20}
-height={20}
+width={25}
+height={25}
 className='absolute left-4 top-1/2 -translate-y-1/2 w-[20px] h-[20px]'
 alt="car model"
 />
@@ -54,12 +54,12 @@ alt="car model"
             name="model"
             value={model}
             onChange={(e) => setModel(e.target.value)}
-            placeholder="model"
-            className="searchbar__input pr-12"
+            placeholder="Tiguan"
+            className="searchbar__input "
           />
           <SearchButton otherClasses="absolute right-2 top-1/2 -translate-y-1/2 sm:flex" />
         </div>
-
+  
     </form>
   )
 }
