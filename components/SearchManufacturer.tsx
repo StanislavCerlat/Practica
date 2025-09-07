@@ -15,7 +15,7 @@ const SearchManufacturer = ({ manufacturer, setManufacturer }: SearchManufacture
     ))
   return (
     <div className="search-manufacturer">
-      <Combobox>
+      <Combobox value={manufacturer} onChange={setManufacturer}>
         <div className="relative w-full">
           {/* Iconul mașinii */}
           <img
@@ -31,40 +31,42 @@ const SearchManufacturer = ({ manufacturer, setManufacturer }: SearchManufacture
             className="search-manufacturer__input pl-10"
              placeholder="volkswagen"
             displayValue={(manufacturer: string) => manufacturer}
-            onChange={(e) => setManufacturer(e.target.value)}
+            onChange={(e) => { setQuery(e.target.value); setManufacturer(e.target.value); }}
           />
+        </div>
 
-<Transition
-  as={Fragment}
-  leave="transition ease-in duration-100"
-  leaveFrom="opacity-0"
-  afterLeave={() => setQuery('')}
->
-  <Combobox.Options>
-    {filteredManufacturers.length === 0 && query !== "" ? (
-      <Combobox.Option
-        value={query}
-        className="search-manufacturer__option"
-      >
-        Create "{query}"
-      </Combobox.Option>
-    ) : (
-      filteredManufacturers.map((item) => (
-        <Combobox.Option
-          key={item}
-          className={({ active }) =>
-            `relative search-manufacturer__option ${
-              active ? 'bg-primary-blue text-white' : 'text-gray-900'
-            }`
-          }
-          value={item}
-        >
-          {item}
-        </Combobox.Option>
-      ))
-    )}
-  </Combobox.Options>
-</Transition>
+        <div className="relative w-full">
+          <Transition
+            as={Fragment}
+            leave="transition ease-in duration-100"
+            leaveFrom="opacity-0"
+            afterLeave={() => setQuery('')}
+          >
+            <Combobox.Options className="absolute left-0 mt-2 max-h-60 w-full overflow-auto rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-none z-50">
+            {filteredManufacturers.length === 0 && query !== "" ? (
+              <Combobox.Option
+                value={query}
+                className="search-manufacturer__option"
+              >
+                Create "{query}"
+              </Combobox.Option>
+            ) : (
+              filteredManufacturers.map((item) => (
+                <Combobox.Option
+                  key={item}
+                  className={({ active }) =>
+                    `relative search-manufacturer__option ${
+                      active ? 'bg-primary-blue text-white' : 'text-gray-900'
+                    }`
+                  }
+                  value={item}
+                >
+                  {item}
+                </Combobox.Option>
+              ))
+            )}
+            </Combobox.Options>
+          </Transition>
         </div>
       </Combobox>
     </div>
