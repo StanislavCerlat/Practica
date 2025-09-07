@@ -1,13 +1,27 @@
 "use client"
-import { Fragment, useState } from "react"
+import { Fragment, useState, useEffect } from "react"
 import Image from "next/image"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { Listbox, Transition } from "@headlessui/react"
 import { CustomFilterProps, OptionProps } from "@/types"
 import { updateSearchParams } from "@/utils"
 const CustomFilter = ({title, options }: CustomFilterProps) => {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [selected, setSelected] = useState(options[0] || { title: "", value: "" });
+
+  // Sync with URL parameters on component mount
+  useEffect(() => {
+    const paramValue = searchParams.get(title);
+    if (paramValue) {
+      const matchingOption = options.find(option => 
+        option.value.toLowerCase() === paramValue.toLowerCase()
+      );
+      if (matchingOption) {
+        setSelected(matchingOption);
+      }
+    }
+  }, [searchParams, title, options]);
 
 const handleUpdateParams = (e: OptionProps) => {
   const newPathName = updateSearchParams(title, e.value.toLowerCase());
@@ -39,9 +53,9 @@ alt="chevron up down"
          </Listbox.Button>
          <Transition
           as={Fragment}
-          Leave="transition ease-in duration-100"
-          LeaveFrom="opacity-100"
-          LeaveTo="opacity-0"
+          leave="transition ease-in duration-100"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
           >
             <Listbox.Options className="custom-filter__options">
               {options.map((option) => (

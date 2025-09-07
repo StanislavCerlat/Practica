@@ -44,6 +44,11 @@ export const manufacturers = [
   
   export const yearsOfProduction = [
     { title: "Year", value: "" },
+    { title: "2010", value: "2010" },
+    { title: "2011", value: "2011" },
+    { title: "2012", value: "2012" },
+    { title: "2013", value: "2013" },
+    { title: "2014", value: "2014" },
     { title: "2015", value: "2015" },
     { title: "2016", value: "2016" },
     { title: "2017", value: "2017" },
@@ -53,6 +58,8 @@ export const manufacturers = [
     { title: "2021", value: "2021" },
     { title: "2022", value: "2022" },
     { title: "2023", value: "2023" },
+    { title: "2024", value: "2024" },
+    { title: "2025", value: "2025" },
   ];
   
   export const fuels = [
@@ -67,6 +74,14 @@ export const manufacturers = [
     {
       title: "Electricity",
       value: "Electricity",
+    },
+    {
+      title: "Hybrid",
+      value: "Hybrid",
+    },
+    {
+      title: "Diesel",
+      value: "Diesel",
     },
   ];
   

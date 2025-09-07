@@ -20,7 +20,12 @@ export async function fetchCars(filters: FilterProps) {
   }
 
   // If no manufacturer is selected, fetch cars from multiple popular manufacturers
-  const popularManufacturers = ['Honda', 'Toyota', 'Ford', 'BMW', 'Mercedes-Benz', 'Audi', 'Nissan', 'Hyundai'];
+  const popularManufacturers = [
+    'Honda', 'Toyota', 'Ford', 'BMW', 'Mercedes-Benz', 'Audi', 'Nissan', 'Hyundai',
+    'Chevrolet', 'Volkswagen', 'Kia', 'Mazda', 'Subaru', 'Lexus', 'Infiniti', 'Acura',
+    'Volvo', 'Jaguar', 'Land Rover', 'Porsche', 'Tesla', 'Genesis', 'Lincoln', 'Cadillac',
+    'Buick', 'Chrysler', 'Dodge', 'Jeep', 'Ram', 'GMC', 'Mitsubishi', 'Suzuki'
+  ];
   const allCars: CarProps[] = [];
 
   try {

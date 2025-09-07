@@ -22,12 +22,26 @@ export default async function Home({ searchParams }: HomeProps) {
     limit: Number(params.limit) || 10,
   });
 
+  // Get the current limit from params, default to 10
+  const currentLimit = Number(params.limit) || 10;
+  
+  // Slice the cars to show only the current limit
+  const displayedCars = allCars?.slice(0, currentLimit) || [];
+
   console.log('Fetched cars:', allCars);
   console.log('Is array?', Array.isArray(allCars));
   console.log('Cars length:', allCars?.length);
   console.log('=== DEBUG END ===');
 
   const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1;
+  const hasMoreCars = allCars && allCars.length > currentLimit;
+  
+  console.log('=== SHOW MORE DEBUG ===');
+  console.log('Total cars:', allCars?.length);
+  console.log('Current limit:', currentLimit);
+  console.log('Has more cars:', hasMoreCars);
+  console.log('isNext (should be false to show button):', !hasMoreCars);
+  console.log('=== END DEBUG ===');
 
   // restul codului...
 
@@ -52,13 +66,13 @@ export default async function Home({ searchParams }: HomeProps) {
         {!isDataEmpty ? (
           <section>
             <div className="home__cars-wrapper">
-              {allCars?.map((car, index) => (
+              {displayedCars?.map((car: any, index: number) => (
                 <CarCard key={index} car={car} />
               ))}
             </div>
             <ShowMore
-              pageNumber={(Number(params.limit) || 10) / 10}
-              isNext={(Number(params.limit) || 10) >= allCars.length}
+              pageNumber={currentLimit / 10}
+              isNext={!hasMoreCars}
             />
 
 
